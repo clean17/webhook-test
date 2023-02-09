@@ -2,16 +2,15 @@ package shop.mtcoding.blog2.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.blog2.dto.user.UserReq.UserJoinDto;
+import shop.mtcoding.blog2.dto.user.UserReq.UserLoginDto;
 import shop.mtcoding.blog2.exception.CustomException;
+import shop.mtcoding.blog2.model.User;
 import shop.mtcoding.blog2.service.UserService;
 
 @Controller
@@ -59,13 +58,20 @@ public class UserController {
             throw new CustomException("이메일을 입력하세요");
         }
         service.회원가입(userDto);        
-        return "redirect:/";
+        return "redirect:/login";
     }
 
-    @PostMapping("/join1")
-    public String userJoin1(){
-        
-        return "";
+    @PostMapping("/login")
+    public String userLogin(UserLoginDto userDto){
+        if( userDto.getUsername()==null||userDto.getUsername().isEmpty()){
+            throw new CustomException("아이디를 입력하세요");
+        }
+        if( userDto.getPassword()==null||userDto.getPassword().isEmpty()){
+            throw new CustomException("패스워드를 입력하세요");
+        }
+        User prinipal = service.로그인(userDto);
+        session.setAttribute("principal", prinipal);         
+        return "redirect:/";
     }
 
     @PostMapping("/join2")

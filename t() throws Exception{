@@ -1,0 +1,38 @@
+[33mcommit e96876c60cab97576a0087e0a37b5f079b6f5a3e[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Merge: 67a6ec3 fd58b00
+Author: clean17 <118657689+clean17@users.noreply.github.com>
+Date:   Thu Feb 9 15:56:17 2023 +0900
+
+    Merge pull request #1 from clean17/topic
+    
+    회원가입 기능 완료
+
+[33mcommit fd58b001d649f106bfefa774f6e6a90de0c515fd[m[33m ([m[1;31morigin/topic[m[33m, [m[1;32mtopic[m[33m)[m
+Author: clean17 <piw940317@gmail.com>
+Date:   Thu Feb 9 15:53:19 2023 +0900
+
+    fix - 테이블 생성시 오타나서 수정
+
+[33mcommit b9f6d86e1826059eb341617c7b626d11e4b75a2d[m
+Author: clean17 <piw940317@gmail.com>
+Date:   Thu Feb 9 15:36:42 2023 +0900
+
+    회원가입 핸들러 테스트 완료
+
+[33mcommit ca7186e060d47f6eff2abd59013a1ba4fce808c2[m
+Author: clean17 <piw940317@gmail.com>
+Date:   Thu Feb 9 15:03:18 2023 +0900
+
+    회원가입 핸들러 완료
+
+[33mcommit 766cc29af214eb91917d6355e4a4e7a578ebcc79[m
+Author: clean17 <piw940317@gmail.com>
+Date:   Thu Feb 9 12:41:37 2023 +0900
+
+    Scrip.back 완료
+
+[33mcommit 67a6ec3c744d7f31955c41a0caa2aa622594dfe0[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m, [m[1;32mlogin-topic[m[33m)[m
+Author: clean17 <piw940317@gmail.com>
+Date:   Thu Feb 9 12:08:07 2023 +0900
+
+    블로그 두번째 제작 기본 뷰 연결
