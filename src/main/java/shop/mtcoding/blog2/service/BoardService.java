@@ -26,16 +26,7 @@ public class BoardService {
     public void 글쓰기(BoardWriteDto bDto, int principalId){
         
 
-        String thumbnail = "";
-            String html = bDto.getContent();
-            Document d = Jsoup.parse(html);
-            Elements els = d.select("img");
-            if ( els.size() == 0 ){
-                thumbnail = "/images/dora1.png";
-            }else{
-                String result = els.attr("src");
-                thumbnail = result;
-            }
+
         
         int result = boardRepository.insertBoard(
                         bDto.getTitle(), 
