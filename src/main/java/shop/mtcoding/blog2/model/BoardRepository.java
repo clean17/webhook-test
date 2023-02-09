@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardDetailDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardMainListDto;
-import shop.mtcoding.blog2.dto.board.BoardResp.BoardUpdateDto;
+import shop.mtcoding.blog2.dto.board.BoardResp.BoardUpdateRespDto;
 
 @Mapper
 public interface BoardRepository {
@@ -27,5 +27,5 @@ public interface BoardRepository {
         @Param("content") String content,
         @Param("id") int id
     );
-    public BoardUpdateDto findByIdforUpdate(int id);
+    public BoardUpdateRespDto findByIdforUpdate(int id);
 }

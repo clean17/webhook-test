@@ -12,7 +12,7 @@
       select * from board_tb where id = #{id}
     </select>
 
-    <select id="findByIdforUpdate" resultType="shop.mtcoding.blog2.dto.board.BoardResp$BoardUpdateDto">
+    <select id="findByIdforUpdate" resultType="shop.mtcoding.blog2.dto.board.BoardResp$BoardUpdateRespDto">
       select * from board_tb where id = #{id}
     </select>
 

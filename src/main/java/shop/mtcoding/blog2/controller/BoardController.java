@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import shop.mtcoding.blog2.dto.ResponseDto;
+import shop.mtcoding.blog2.dto.board.BoardReq.BoardUpdateDto;
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardDetailDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardMainListDto;
-import shop.mtcoding.blog2.dto.board.BoardResp.BoardUpdateDto;
+import shop.mtcoding.blog2.dto.board.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.blog2.exception.CustomApiException;
 import shop.mtcoding.blog2.exception.CustomException;
 import shop.mtcoding.blog2.model.BoardRepository;
@@ -75,7 +76,7 @@ public class BoardController {
         if( principal == null ){
             throw new CustomException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
         }
-        BoardUpdateDto dto = boardRepository.findByIdforUpdate(id);
+        BoardUpdateRespDto dto = boardRepository.findByIdforUpdate(id);
         if ( dto == null ){
             throw new CustomException("존재하지 않는 게시글 입니다.");
         }
@@ -121,6 +122,15 @@ public class BoardController {
         User principal = (User) session.getAttribute("principal");
         if( principal == null ){
             throw new CustomApiException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
+        }
+        if( bDto.getTitle()==null||bDto.getTitle().isEmpty()){
+            throw new CustomException("글 제목이 없습니다.");
+        }
+        if( bDto.getTitle().length()>100){
+            throw new CustomException("제목을 100자 이내로 작성하세요.");
+        }        
+        if( bDto.getContent()==null||bDto.getContent().isEmpty()){
+            throw new CustomException("글 내용이 없습니다.");
         }
         service.글수정(bDto, id, principal.getId());
 

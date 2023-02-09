@@ -24,7 +24,7 @@ public class BoardResp {
 
     @Getter
     @Setter
-    public static class BoardUpdateDto{
+    public static class BoardUpdateRespDto{
         private int id;
         private String title;
         private String content;
