@@ -1,8 +1,12 @@
 package shop.mtcoding.blog2.controllerTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import javax.print.attribute.standard.Media;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +20,9 @@ import org.springframework.mock.web.server.MockWebSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import shop.mtcoding.blog2.dto.board.BoardReq.BoardUpdateDto;
 import shop.mtcoding.blog2.model.User;
 
 @AutoConfigureMockMvc
@@ -26,6 +33,10 @@ public class BoardControllerTest {
     private MockMvc mvc;
 
     private MockHttpSession session;
+
+    @Autowired
+    private ObjectMapper om;
+
 
     @BeforeEach
     public void setUp(){
@@ -50,11 +61,40 @@ public class BoardControllerTest {
         rs.andExpect(status().isOk());
     }
 
+
+
     @Test
     public void boardDelete_test() throws Exception{
         int id =1;
 
         ResultActions rs = mvc.perform(delete("/board/"+id+"/delete").session(session));
+        rs.andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateForm_test() throws Exception{
+        int id = 1;
+
+        ResultActions rs = mvc.perform(get("/board/"+id+"/updateForm").session(session));
+        rs.andExpect(status().isOk());
+    }
+
+    @Test
+    public void boardUpdate_test() throws Exception{
+
+
+        BoardUpdateDto dto = new BoardUpdateDto();
+        dto.setTitle("안녕");
+        dto.setContent("안녕ㅎ");
+        String result = om.writeValueAsString(dto);
+        System.out.println(result);
+        int id =1;
+
+        ResultActions rs = mvc.perform(put("/board/"+id)
+        .content(result)
+        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .session(session)
+        );
         rs.andExpect(status().isOk());
     }
 }

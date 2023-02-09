@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import shop.mtcoding.blog2.dto.board.BoardReq.BoardUpdateDto;
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
 import shop.mtcoding.blog2.exception.CustomApiException;
 import shop.mtcoding.blog2.exception.CustomException;
@@ -35,6 +36,25 @@ public class BoardService {
             throw new CustomApiException("삭제할 권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
         int result1 = boardRepository.deleteBoard(id);
+        if ( result1 != 1 ){
+            throw new CustomApiException("서버에 일시적인 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Transactional
+    public void 글수정(BoardUpdateDto bDto, int id,  int principalId){
+        Board board = boardRepository.findById(id);
+        if ( board == null ){
+            throw new CustomApiException("해당 게시글이 없습니다.");
+        }
+        Board board2 = boardRepository.findById(id);
+        if ( board2.getUserId() != principalId){
+            throw new CustomApiException("수정할 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        int result1 = boardRepository.updateBoard(
+                            bDto.getTitle(),
+                            bDto.getContent(),
+                            id);
         if ( result1 != 1 ){
             throw new CustomApiException("서버에 일시적인 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -3,7 +3,7 @@
 
     <div class="container my-3">
         <div class="mb-3">
-            <a href="" class="btn btn-warning">수정</a>
+            <a href="/board/${dto.id}/updateForm" class="btn btn-warning">수정</a>
             <button type="button" class="btn btn-danger" onclick="deleteBoardById(${dto.id})">삭제</button>
         </div>
 

@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import shop.mtcoding.blog2.dto.ResponseDto;
+import shop.mtcoding.blog2.dto.board.BoardReq.BoardUpdateDto;
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardDetailDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardMainListDto;
+import shop.mtcoding.blog2.dto.board.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.blog2.exception.CustomApiException;
 import shop.mtcoding.blog2.exception.CustomException;
 import shop.mtcoding.blog2.model.BoardRepository;
@@ -47,7 +51,7 @@ public class BoardController {
 
     @GetMapping("/")
     public String  main(Model model){
-        // mockSession();
+        mockSession();
     List<BoardMainListDto> dtos = boardRepository.findAllforList();
     model.addAttribute("dtos", dtos);
     return "board/main";
@@ -64,6 +68,23 @@ public class BoardController {
         BoardDetailDto db =  boardRepository.findBoardforDetail(id);
         model.addAttribute("dto", db);
         return "board/detail";
+    }
+
+    @GetMapping("/board/{id}/updateForm")
+    public String updateForm(@PathVariable int id, Model model){
+        User principal = (User) session.getAttribute("principal");
+        if( principal == null ){
+            throw new CustomException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
+        }
+        BoardUpdateRespDto dto = boardRepository.findByIdforUpdate(id);
+        if ( dto == null ){
+            throw new CustomException("존재하지 않는 게시글 입니다.");
+        }
+        if ( dto.getUserId() != principal.getId()){
+            throw new CustomException("해당 게시글을 수정할 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        model.addAttribute("dto", dto);
+        return "board/updateForm";
     }
 
     @PostMapping("/board/write")
@@ -87,7 +108,6 @@ public class BoardController {
 
     @DeleteMapping("/board/{id}/delete")
     public ResponseEntity<?> boardDelete(@PathVariable int id){
-        System.out.println("테스트 : "+ id);
         User principal = (User) session.getAttribute("principal");
         if( principal == null ){
             throw new CustomApiException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
@@ -97,6 +117,26 @@ public class BoardController {
         return new ResponseEntity<>(new ResponseDto<>(1, "삭제 성공", null), HttpStatus.OK);
     }
 
-    
+    @PutMapping("/board/{id}")
+    public ResponseEntity<?> boardUpdate(@PathVariable int id ,@RequestBody BoardUpdateDto bDto){
+        User principal = (User) session.getAttribute("principal");
+        if( principal == null ){
+            throw new CustomApiException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
+        }
+        if( bDto.getTitle()==null||bDto.getTitle().isEmpty()){
+            throw new CustomException("글 제목이 없습니다.");
+        }
+        if( bDto.getTitle().length()>100){
+            throw new CustomException("제목을 100자 이내로 작성하세요.");
+        }        
+        if( bDto.getContent()==null||bDto.getContent().isEmpty()){
+            throw new CustomException("글 내용이 없습니다.");
+        }
+        service.글수정(bDto, id, principal.getId());
+
+        return new ResponseEntity<>(new ResponseDto<>(1, "수정 성공", true), HttpStatus.OK);
+    }
+
+
 
 }
