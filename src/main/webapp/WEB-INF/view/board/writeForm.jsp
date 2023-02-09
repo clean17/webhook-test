@@ -2,14 +2,14 @@
 <%@ include file="../layout/header.jsp" %>
 
     <div class="container my-3">
-        <form>
+        <form action="/board/write" method="post">
             <div class="form-group">
-                <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" value="글 제목 위치">
+                <input type="text" class="form-control" id="title" placeholder="글 제목을 입력해주세요" name="title">
             </div>
             <div class="form-group">
-                <textarea class="form-control summernote" id="content" rows="5" name="content">글 내용 위치</textarea>
+                <textarea class="form-control summernote" id="content" rows="5" name="content" placeholder="글 내용을 입력해주세요"></textarea>
             </div>
-            <button type="button" class="btn btn-primary">글쓰기완료</button>
+            <button class="btn btn-primary">글쓰기완료</button>
         </form>
     </div>
 <%@ include file="../layout/footer.jsp" %>

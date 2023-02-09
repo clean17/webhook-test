@@ -79,11 +79,4 @@ public class UserController {
         
         return "";
     }
-
-    @PostMapping("/join3")
-    public String userJoin3(){
-        
-        return "";
-    }
-
 }
