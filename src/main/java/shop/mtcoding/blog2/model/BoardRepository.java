@@ -19,4 +19,5 @@ public interface BoardRepository {
     public List<BoardMainListDto> findAllforList();
 
     public BoardDetailDto findBoardforDetail(int id);
+    public int deleteBoard(int id);
 }

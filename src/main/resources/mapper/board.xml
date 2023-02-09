@@ -24,4 +24,8 @@
     <insert id="insertBoard">
       insert into board_tb ( title, content, user_id, created_at) values (#{title}, #{content}, #{userId}, now())
     </insert>
+
+    <delete id="deleteBoard">
+      delete from board_tb where id = #{id}
+    </delete>
 </mapper>

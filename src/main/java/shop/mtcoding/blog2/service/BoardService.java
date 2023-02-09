@@ -21,4 +21,9 @@ public class BoardService {
             throw new CustomException("글 쓰기에 실패 했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Transactional
+    public void 글삭제(){
+    
+    }
 }

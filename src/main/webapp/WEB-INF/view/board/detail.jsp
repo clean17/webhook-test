@@ -4,7 +4,7 @@
     <div class="container my-3">
         <div class="mb-3">
             <a href="" class="btn btn-warning">수정</a>
-            <button type="button" class="btn btn-danger">삭제</button>
+            <button type="button" class="btn btn-danger" id="delete-btn" onclick="deleteBoardById($(dto.id))">삭제</button>
         </div>
 
         <div class="mb-2 d-flex justify-content-end">
@@ -43,4 +43,22 @@
             </ul>
         </div>
     </div>
+    <script>
+        $('.summernote').summernote({
+                tabsize: 2,
+                height: 400
+            });
+        function deleteBoardById(id){
+            $.ajax({
+                type: "delete",
+                url: "/board/"+id+"/delete",
+                dataType:"json"
+            }).done((res) => {
+            
+            }).fail((err) => {
+            
+            });
+        
+        }
+    </script>
 <%@ include file="../layout/footer.jsp" %>
