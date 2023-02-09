@@ -10,4 +10,6 @@ public class BoardReq {
         private String title;
         private String content;
     }
+
+
 }

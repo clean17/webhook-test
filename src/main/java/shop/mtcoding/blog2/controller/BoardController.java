@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
+import shop.mtcoding.blog2.dto.board.BoardResp.BoardDetailDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardMainListDto;
 import shop.mtcoding.blog2.exception.CustomException;
 import shop.mtcoding.blog2.model.BoardRepository;
@@ -52,10 +54,11 @@ public class BoardController {
     return "board/writeForm";
     }
 
-    @GetMapping("/1")
-    public String  main2(){
-        
-    return "board/main";
+    @GetMapping("/board/detail/{id}")
+    public String boardDetail(@PathVariable int id, Model model){
+        BoardDetailDto db =  boardRepository.findBoardforDetail(id);
+        model.addAttribute("dto", db);
+        return "board/detail";
     }
 
     @PostMapping("/board/write")
