@@ -103,7 +103,7 @@ public class BoardController {
             throw new CustomException("글 내용이 없습니다.");
         }
         service.글쓰기(boardDto, principal.getId());
-        return "board/main";
+        return "redirect:/";
     }
 
     @DeleteMapping("/board/{id}/delete")

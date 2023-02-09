@@ -24,7 +24,7 @@
     </select>
 
     <select id="findBoardforDetail" resultType="shop.mtcoding.blog2.dto.board.BoardResp$BoardDetailDto">
-      select b.id, b.title, b.content, 
+      select b.id, b.title, b.content, b.user_id,
       ( select username from user_tb where id = b.user_id ) username 
       from board_tb b 
       where id = #{id}

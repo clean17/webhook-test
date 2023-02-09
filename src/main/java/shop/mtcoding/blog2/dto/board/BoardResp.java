@@ -20,6 +20,7 @@ public class BoardResp {
         private String title;
         private String content;
         private String username;
+        private int userId;
     }
 
     @Getter
