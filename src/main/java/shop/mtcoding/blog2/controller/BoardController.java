@@ -1,13 +1,17 @@
 package shop.mtcoding.blog2.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
+import shop.mtcoding.blog2.dto.board.BoardResp.BoardMainListDto;
 import shop.mtcoding.blog2.exception.CustomException;
 import shop.mtcoding.blog2.model.BoardRepository;
 import shop.mtcoding.blog2.model.User;
@@ -21,6 +25,9 @@ public class BoardController {
 
     @Autowired
     private BoardService service;
+    
+    @Autowired
+    private BoardRepository boardRepository;
 
     private void mockSession(){
         User mockUser = new User();
@@ -32,8 +39,10 @@ public class BoardController {
     }
 
     @GetMapping("/")
-    public String  main(){
+    public String  main(Model model){
         mockSession();
+    List<BoardMainListDto> dtos = boardRepository.findAllforList();
+    model.addAttribute("dtos", dtos);
     return "board/main";
     }
 

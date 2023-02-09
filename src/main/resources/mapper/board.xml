@@ -8,6 +8,10 @@
         select * from board_tb
     </select>
 
+    <select id="findAllforList" resultType="shop.mtcoding.blog2.dto.board.BoardResp$BoardMainListDto">
+      select b.id, b.title, ( select username from user_tb where id = b.user_id ) username from board_tb b 
+    </select>
+
     <insert id="insertBoard">
       insert into board_tb ( title, content, user_id, created_at) values (#{title}, #{content}, #{userId}, now())
     </insert>
