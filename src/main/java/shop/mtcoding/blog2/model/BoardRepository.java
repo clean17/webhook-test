@@ -24,7 +24,8 @@ public interface BoardRepository {
     public int deleteBoard(int id);
     public int updateBoard(
         @Param("title") String title,
-        @Param("content") String content
+        @Param("content") String content,
+        @Param("id") int id
     );
     public BoardUpdateDto findByIdforUpdate(int id);
 }

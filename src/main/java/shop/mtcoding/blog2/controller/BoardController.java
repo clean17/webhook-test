@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import shop.mtcoding.blog2.dto.ResponseDto;
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
@@ -116,12 +117,12 @@ public class BoardController {
     }
 
     @PutMapping("/board/{id}")
-    public ResponseEntity<?> boardUpdate(@PathVariable int id){
+    public ResponseEntity<?> boardUpdate(@PathVariable int id ,@RequestBody BoardUpdateDto bDto){
         User principal = (User) session.getAttribute("principal");
         if( principal == null ){
             throw new CustomApiException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
         }
-        service.글수정(id, principal.getId());
+        service.글수정(bDto, id,  principal.getId());
 
         return new ResponseEntity<>(new ResponseDto<>(1, "수정 성공", true), HttpStatus.OK);
     }

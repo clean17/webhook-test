@@ -39,6 +39,6 @@
     </delete>
 
     <update id="updateBoard">
-      update board_tb set title=#{title}, content=#{content}
+      update board_tb set title=#{title}, content=#{content} where id = #{id}
     </update>
 </mapper>
