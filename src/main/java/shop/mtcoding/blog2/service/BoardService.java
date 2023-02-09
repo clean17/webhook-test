@@ -39,4 +39,9 @@ public class BoardService {
             throw new CustomApiException("서버에 일시적인 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Transactional
+    public void 글수정(){
+        
+    }
 }

@@ -10,7 +10,12 @@
 
     <select id="findById" resultType="shop.mtcoding.blog2.model.Board">
       select * from board_tb where id = #{id}
-  </select>
+    </select>
+
+    <select id="findByIdforUpdate" resultType="shop.mtcoding.blog2.dto.board.BoardResp$BoardUpdateDto">
+      select * from board_tb where id = #{id}
+    </select>
+
 
     <select id="findAllforList" resultType="shop.mtcoding.blog2.dto.board.BoardResp$BoardMainListDto">
       select b.id, b.title, 
@@ -32,4 +37,8 @@
     <delete id="deleteBoard">
       delete from board_tb where id = #{id}
     </delete>
+
+    <update id="updateBoard">
+      update board_tb set title=#{title}, content=#{content}
+    </update>
 </mapper>

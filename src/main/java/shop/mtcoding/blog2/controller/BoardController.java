@@ -18,6 +18,7 @@ import shop.mtcoding.blog2.dto.ResponseDto;
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardDetailDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardMainListDto;
+import shop.mtcoding.blog2.dto.board.BoardResp.BoardUpdateDto;
 import shop.mtcoding.blog2.exception.CustomApiException;
 import shop.mtcoding.blog2.exception.CustomException;
 import shop.mtcoding.blog2.model.BoardRepository;
@@ -66,6 +67,23 @@ public class BoardController {
         return "board/detail";
     }
 
+    @GetMapping("/board/{id}/updateForm")
+    public String updateForm(@PathVariable int id, Model model){
+        User principal = (User) session.getAttribute("principal");
+        if( principal == null ){
+            throw new CustomException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
+        }
+        BoardUpdateDto dto = boardRepository.findByIdforUpdate(id);
+        if ( dto == null ){
+            throw new CustomException("존재하지 않는 게시글 입니다.");
+        }
+        if ( dto.getUserId() != principal.getId()){
+            throw new CustomException("해당 게시글을 수정할 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        model.addAttribute("dto", dto);
+        return "board/updateForm";
+    }
+
     @PostMapping("/board/write")
     public String boardWrite(BoardWriteDto boardDto){
         User principal = (User) session.getAttribute("principal");
@@ -97,6 +115,6 @@ public class BoardController {
         return new ResponseEntity<>(new ResponseDto<>(1, "삭제 성공", null), HttpStatus.OK);
     }
 
-    
+
 
 }
