@@ -1,5 +1,8 @@
 package shop.mtcoding.blog2.service;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,8 +21,27 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
     @Transactional
+
+    
     public void 글쓰기(BoardWriteDto bDto, int principalId){
-        int result = boardRepository.insertBoard(bDto.getTitle(), bDto.getContent(), principalId);
+        
+
+        String thumbnail = "";
+            String html = bDto.getContent();
+            Document d = Jsoup.parse(html);
+            Elements els = d.select("img");
+            if ( els.size() == 0 ){
+                thumbnail = "/images/dora1.png";
+            }else{
+                String result = els.attr("src");
+                thumbnail = result;
+            }
+        
+        int result = boardRepository.insertBoard(
+                        bDto.getTitle(), 
+                        bDto.getContent(),
+                        thumbnail,
+                        principalId);
         if ( result != 1 ){
             throw new CustomException("글 쓰기에 실패 했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }

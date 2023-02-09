@@ -9,7 +9,6 @@
                 <div class="card-body my-title-ellipsis">
                     <div class="my-title-ellipsis">작성자 : ${dto.username}</div>
                     <h4 class="card-title my-title-ellipsis">${dto.title}</h4>
-                    <div>${dto.thumbnail}</div>
                     <a href="/board/detail/${dto.id}" class="btn btn-primary">상세보기</a>
                 </div>
             </div>
