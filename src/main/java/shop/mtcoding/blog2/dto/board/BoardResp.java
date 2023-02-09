@@ -11,6 +11,7 @@ public class BoardResp {
         private int id;
         private String title;
         private String username;
+        private String thumbnail;
     }
 
     @Getter
@@ -20,6 +21,7 @@ public class BoardResp {
         private String title;
         private String content;
         private String username;
+        private int userId;
     }
 
     @Getter

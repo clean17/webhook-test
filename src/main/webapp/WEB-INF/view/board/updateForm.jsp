@@ -28,12 +28,13 @@
                 url: "/board/"+id,
                 data: JSON.stringify(data),
                 headers:{
-                    "content-type":"application/json; charset=utf-8"
+                    "content-type":"application/json; charsettf-8"
                 },
                 dataType:"json"
             }).done((res) => {
                 alert(res.msg);
-                location.href="/";
+                location.href="/board/detail/"+id;
+                // location.href="/";
             }).fail((err) => {
                 alert(err.responseJSON.msg);
                 location.href="/";
