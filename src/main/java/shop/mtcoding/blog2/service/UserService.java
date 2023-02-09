@@ -33,7 +33,7 @@ public class UserService {
     public User 로그인(UserLoginDto userDto){
         User principal = userRepository.findByUsernameAndPassword(userDto.getUsername(), userDto.getPassword());
         if ( principal == null ){
-            throw new CustomException("로그인에 실패 했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);  
+            throw new CustomException("존재 하지 않는 계정입니다.");  
         }
         return principal;
     }

@@ -28,13 +28,13 @@ public class UserControllerTest {
         rs.andExpect(status().is3xxRedirection());
     }
 
-    // @Test
-    // public void userJoin_test() throws Exception{
-    //     String resp = "username=df&password=43&email=23@13";
+    @Test
+    public void userLogin_test() throws Exception{
+        String resp = "username=ssar&password=1234";
 
-    //     ResultActions rs = mvc.perform(post("/join").content(resp).contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
+        ResultActions rs = mvc.perform(post("/login").content(resp).contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
 
-    //     rs.andExpect(status().is3xxRedirection());
-    // }
+        rs.andExpect(status().is3xxRedirection());
+    }
 
 }
