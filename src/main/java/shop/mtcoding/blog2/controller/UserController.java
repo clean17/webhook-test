@@ -50,13 +50,13 @@ public class UserController {
     @PostMapping("/join")
     public String userJoin(UserJoinDto userDto){
         if( userDto.getUsername()==null||userDto.getUsername().isEmpty()){
-            new CustomException("아이디를 입력하세요");
+            throw new CustomException("아이디를 입력하세요");
         }
         if( userDto.getPassword()==null||userDto.getPassword().isEmpty()){
-            new CustomException("패스워드를 입력하세요");
+            throw new CustomException("패스워드를 입력하세요");
         }
         if( userDto.getEmail()==null||userDto.getEmail().isEmpty()){
-            new CustomException("이메일을 입력하세요");
+            throw new CustomException("이메일을 입력하세요");
         }
         service.회원가입();        
         return "redirect:/";
