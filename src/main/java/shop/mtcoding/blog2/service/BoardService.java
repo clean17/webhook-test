@@ -54,9 +54,12 @@ public class BoardService {
         int result1 = boardRepository.updateBoard(
                             bDto.getTitle(),
                             bDto.getContent(),
-                            principalId);
+                            id);
         if ( result1 != 1 ){
             throw new CustomApiException("서버에 일시적인 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public void 글수정(shop.mtcoding.blog2.dto.board.BoardResp.BoardUpdateDto bDto, int id, int id2) {
     }
 }

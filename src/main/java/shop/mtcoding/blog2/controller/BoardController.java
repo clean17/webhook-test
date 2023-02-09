@@ -122,7 +122,7 @@ public class BoardController {
         if( principal == null ){
             throw new CustomApiException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
         }
-        service.글수정(bDto, id,  principal.getId());
+        service.글수정(bDto, id, principal.getId());
 
         return new ResponseEntity<>(new ResponseDto<>(1, "수정 성공", true), HttpStatus.OK);
     }
