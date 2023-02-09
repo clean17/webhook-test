@@ -1,4 +1,4 @@
-package shop.mtcoding.blog2.controller;
+package shop.mtcoding.blog2.controllerTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
