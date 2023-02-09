@@ -1,13 +1,27 @@
 package shop.mtcoding.blog2.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.connector.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.blog2.dto.user.UserReq.UserJoinDto;
+import shop.mtcoding.blog2.exception.CustomException;
+import shop.mtcoding.blog2.service.UserService;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private HttpSession session;
+
+    @Autowired
+    private UserService service;
     
     @GetMapping("/update")
     public String updateForm(){
@@ -36,31 +50,31 @@ public class UserController {
     @PostMapping("/join")
     public String userJoin(UserJoinDto userDto){
         if( userDto.getUsername()==null||userDto.getUsername().isEmpty()){
-            return "";
+            new CustomException("아이디를 입력하세요");
         }
         if( userDto.getPassword()==null||userDto.getPassword().isEmpty()){
-            return "";
+            new CustomException("패스워드를 입력하세요");
         }
         if( userDto.getEmail()==null||userDto.getEmail().isEmpty()){
-            return "";
+            new CustomException("이메일을 입력하세요");
         }
-        
+        service.회원가입();        
         return "redirect:/";
     }
 
-    @PostMapping("/join")
+    @PostMapping("/join1")
     public String userJoin1(){
         
         return "";
     }
 
-    @PostMapping("/join")
+    @PostMapping("/join2")
     public String userJoin2(){
         
         return "";
     }
 
-    @PostMapping("/join")
+    @PostMapping("/join3")
     public String userJoin3(){
         
         return "";
