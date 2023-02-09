@@ -54,9 +54,10 @@ public class BoardController {
         mockSession();
     List<BoardMainListDto> dtos = boardRepository.findAllforList();
     model.addAttribute("dtos", dtos);
+    System.out.println("테스트 : "+ dtos.get(0).getThumbnail());
     return "board/main";
     }
-
+    
     @GetMapping("/board/write")
     public String writeForm(){
         

@@ -11,6 +11,7 @@ public class BoardResp {
         private int id;
         private String title;
         private String username;
+        private String thumbnail;
     }
 
     @Getter

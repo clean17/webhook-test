@@ -4,11 +4,12 @@
         <div class="my-grid">
         <c:forEach items="${dtos}" var="dto">
             <div class="card pt-3">
-                <img class="card-img-top " src="/images/default_profile.png" alt="Card image">
+                <img class="card-img-top " src="${dto.thumbnail}" alt="Card image">
                 <hr>
                 <div class="card-body my-title-ellipsis">
                     <div class="my-title-ellipsis">작성자 : ${dto.username}</div>
                     <h4 class="card-title my-title-ellipsis">${dto.title}</h4>
+                    <div>${dto.thumbnail}</div>
                     <a href="/board/detail/${dto.id}" class="btn btn-primary">상세보기</a>
                 </div>
             </div>
