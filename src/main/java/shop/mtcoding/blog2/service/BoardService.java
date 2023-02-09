@@ -26,12 +26,12 @@ public class BoardService {
 
     @Transactional
     public void 글삭제(int id, int principalId){
-        int result = boardRepository.deleteBoard(principalId);
-        if ( result != 1 ){
+        Board board = boardRepository.findById(id);
+        if ( board == null ){
             throw new CustomApiException("해당 게시글이 없습니다.");
         }
-        Board board = boardRepository.findById(id);
-        if ( board.getUserId() != principalId){
+        Board board2 = boardRepository.findById(id);
+        if ( board2.getUserId() != principalId){
             throw new CustomApiException("삭제할 권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
         int result1 = boardRepository.deleteBoard(id);

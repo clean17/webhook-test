@@ -4,19 +4,19 @@
     <div class="container my-3">
         <div class="mb-3">
             <a href="" class="btn btn-warning">수정</a>
-            <button type="button" class="btn btn-danger" id="delete-btn" onclick="deleteBoardById($(dto.id))">삭제</button>
+            <button type="button" class="btn btn-danger" onclick="deleteBoardById(${dto.id})">삭제</button>
         </div>
 
         <div class="mb-2 d-flex justify-content-end">
-            글 번호 : &nbsp<span id="id">글번호 위ㅣ<i>&nbsp&nbsp&nbsp&nbsp </i></span> 작성자 : &nbsp<span class="me-3"><i>작성자 위치 </i></span> 
+            글 번호 : &nbsp<span id="id">${dto.id}ㅣ<i>&nbsp&nbsp&nbsp&nbsp </i></span> 작성자 : &nbsp<span class="me-3"><i>${dto.username} </i></span> 
             <i id="heart" class="fa-regular fa-heart my-xl my-cursor"></i>
         </div>
         <div>
-            <h1><b>글 제목 위치</b></h1>
+            <h1><b>${dto.title}</b></h1>
         </div>
         <hr />
         <div>
-            <div>글 내용 위치</div>
+            <div>${dto.content}</div>
         </div>
         <hr />
         <div class="card">

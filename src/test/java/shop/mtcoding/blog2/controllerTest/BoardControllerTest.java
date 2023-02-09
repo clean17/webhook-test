@@ -1,5 +1,6 @@
 package shop.mtcoding.blog2.controllerTest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,6 +47,14 @@ public class BoardControllerTest {
                                                                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                                                                         .session(session));
 
+        rs.andExpect(status().isOk());
+    }
+
+    @Test
+    public void boardDelete_test() throws Exception{
+        int id =1;
+
+        ResultActions rs = mvc.perform(delete("/board/"+id+"/delete").session(session));
         rs.andExpect(status().isOk());
     }
 }

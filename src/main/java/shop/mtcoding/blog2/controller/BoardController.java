@@ -87,6 +87,7 @@ public class BoardController {
 
     @DeleteMapping("/board/{id}/delete")
     public ResponseEntity<?> boardDelete(@PathVariable int id){
+        System.out.println("테스트 : "+ id);
         User principal = (User) session.getAttribute("principal");
         if( principal == null ){
             throw new CustomApiException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
