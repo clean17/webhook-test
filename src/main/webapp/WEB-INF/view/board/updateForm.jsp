@@ -33,7 +33,8 @@
                 dataType:"json"
             }).done((res) => {
                 alert(res.msg);
-                location.href="/";
+                location.href="/board/detail/"+id;
+                // location.href="/";
             }).fail((err) => {
                 alert(err.responseJSON.msg);
                 location.href="/";

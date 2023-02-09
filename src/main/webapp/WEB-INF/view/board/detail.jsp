@@ -10,7 +10,7 @@
         </c:if>
 
         <div class="mb-2 d-flex justify-content-end">
-            글 번호 : &nbsp<span id="id">${dto.id}ㅣ<i>&nbsp&nbsp&nbsp&nbsp </i></span> 작성자 : &nbsp<span class="me-3"><i>${dto.username} </i></span> 
+            글 번호 : &nbsp<span id="id">${dto.id}&nbsp&nbsp<i>&nbsp&nbsp&nbsp&nbsp </i></span> 작성자 : &nbsp<span class="me-3"><i>${dto.username} </i></span> 
             <i id="heart" class="fa-regular fa-heart my-xl my-cursor"></i>
         </div>
         <div>

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import shop.mtcoding.blog2.Util.HtmlParser;
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardUpdateDto;
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
 import shop.mtcoding.blog2.exception.CustomApiException;
@@ -25,9 +26,7 @@ public class BoardService {
     
     public void 글쓰기(BoardWriteDto bDto, int principalId){
         
-
-
-        
+        String thumbnail = HtmlParser.thumbnailString(bDto.getContent());
         int result = boardRepository.insertBoard(
                         bDto.getTitle(), 
                         bDto.getContent(),
@@ -56,6 +55,9 @@ public class BoardService {
 
     @Transactional
     public void 글수정(BoardUpdateDto bDto, int id,  int principalId){
+
+        String thumbnail = HtmlParser.thumbnailString(bDto.getContent());
+
         Board board = boardRepository.findById(id);
         if ( board == null ){
             throw new CustomApiException("해당 게시글이 없습니다.");
@@ -67,6 +69,7 @@ public class BoardService {
         int result1 = boardRepository.updateBoard(
                             bDto.getTitle(),
                             bDto.getContent(),
+                            thumbnail,
                             id);
         if ( result1 != 1 ){
             throw new CustomApiException("서버에 일시적인 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
