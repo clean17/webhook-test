@@ -41,7 +41,18 @@ public class BoardService {
     }
 
     @Transactional
-    public void 글수정(){
-        
+    public void 글수정(int id, int principalId){
+        Board board = boardRepository.findById(id);
+        if ( board == null ){
+            throw new CustomApiException("해당 게시글이 없습니다.");
+        }
+        Board board2 = boardRepository.findById(id);
+        if ( board2.getUserId() != principalId){
+            throw new CustomApiException("수정할 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        int result1 = boardRepository.updateBoard(id, principalId);
+        if ( result1 != 1 ){
+            throw new CustomApiException("서버에 일시적인 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

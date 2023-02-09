@@ -3,6 +3,7 @@ package shop.mtcoding.blog2.controllerTest;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -51,6 +52,8 @@ public class BoardControllerTest {
         rs.andExpect(status().isOk());
     }
 
+
+
     @Test
     public void boardDelete_test() throws Exception{
         int id =1;
@@ -60,10 +63,18 @@ public class BoardControllerTest {
     }
 
     @Test
-    public void updateForm() throws Exception{
+    public void updateForm_test() throws Exception{
         int id = 1;
 
         ResultActions rs = mvc.perform(get("/board/"+id+"/updateForm").session(session));
+        rs.andExpect(status().isOk());
+    }
+
+    @Test
+    public void boardUpdate_test() throws Exception{
+        int id =1;
+
+        ResultActions rs = mvc.perform(put("/board/"+id).session(session));
         rs.andExpect(status().isOk());
     }
 }

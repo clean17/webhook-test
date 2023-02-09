@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import shop.mtcoding.blog2.dto.ResponseDto;
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
@@ -48,7 +49,7 @@ public class BoardController {
 
     @GetMapping("/")
     public String  main(Model model){
-        // mockSession();
+        mockSession();
     List<BoardMainListDto> dtos = boardRepository.findAllforList();
     model.addAttribute("dtos", dtos);
     return "board/main";
@@ -105,7 +106,6 @@ public class BoardController {
 
     @DeleteMapping("/board/{id}/delete")
     public ResponseEntity<?> boardDelete(@PathVariable int id){
-        System.out.println("테스트 : "+ id);
         User principal = (User) session.getAttribute("principal");
         if( principal == null ){
             throw new CustomApiException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
@@ -113,6 +113,17 @@ public class BoardController {
         service.글삭제(id, principal.getId());
 
         return new ResponseEntity<>(new ResponseDto<>(1, "삭제 성공", null), HttpStatus.OK);
+    }
+
+    @PutMapping("/board/{id}")
+    public ResponseEntity<?> boardUpdate(@PathVariable int id){
+        User principal = (User) session.getAttribute("principal");
+        if( principal == null ){
+            throw new CustomApiException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
+        }
+        service.글수정(id, principal.getId());
+
+        return new ResponseEntity<>(new ResponseDto<>(1, "수정 성공", true), HttpStatus.OK);
     }
 
 
