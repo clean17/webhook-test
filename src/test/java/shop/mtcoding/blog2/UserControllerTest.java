@@ -26,6 +26,15 @@ public class UserControllerTest {
         ResultActions rs = mvc.perform(post("/join").content(resp).contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
 
         rs.andExpect(status().is3xxRedirection());
-        
     }
+
+    // @Test
+    // public void userJoin_test() throws Exception{
+    //     String resp = "username=df&password=43&email=23@13";
+
+    //     ResultActions rs = mvc.perform(post("/join").content(resp).contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
+
+    //     rs.andExpect(status().is3xxRedirection());
+    // }
+
 }

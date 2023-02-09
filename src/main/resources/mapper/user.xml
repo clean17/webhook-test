@@ -7,4 +7,8 @@
     <select id="findAll" resultType="shop.mtcoding.blog2.model.User">
         select * from user_tb 
     </select>
+
+    <insert id="insertUser">
+        insert into user_tb (username, password, email, created_at) values (#{username}, #{password}, #{email}, now())
+    </insert>
 </mapper>
