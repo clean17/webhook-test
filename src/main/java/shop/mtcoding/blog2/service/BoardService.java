@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
+import shop.mtcoding.blog2.exception.CustomApiException;
 import shop.mtcoding.blog2.exception.CustomException;
+import shop.mtcoding.blog2.model.Board;
 import shop.mtcoding.blog2.model.BoardRepository;
 
 @Service
@@ -23,7 +25,18 @@ public class BoardService {
     }
 
     @Transactional
-    public void 글삭제(){
-    
+    public void 글삭제(int id, int principalId){
+        int result = boardRepository.deleteBoard(principalId);
+        if ( result != 1 ){
+            throw new CustomApiException("해당 게시글이 없습니다.");
+        }
+        Board board = boardRepository.findById(id);
+        if ( board.getUserId() != principalId){
+            throw new CustomApiException("삭제할 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        int result1 = boardRepository.deleteBoard(id);
+        if ( result1 != 1 ){
+            throw new CustomApiException("서버에 일시적인 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

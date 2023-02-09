@@ -11,6 +11,7 @@ import shop.mtcoding.blog2.dto.board.BoardResp.BoardMainListDto;
 @Mapper
 public interface BoardRepository {
     public List<Board> findAll();
+    public Board findById(int id);
     public int insertBoard(
         @Param("title") String title,
         @Param("content") String content,

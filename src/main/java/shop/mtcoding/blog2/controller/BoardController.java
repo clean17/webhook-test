@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import shop.mtcoding.blog2.dto.ResponseDto;
 import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardDetailDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardMainListDto;
+import shop.mtcoding.blog2.exception.CustomApiException;
 import shop.mtcoding.blog2.exception.CustomException;
 import shop.mtcoding.blog2.model.BoardRepository;
 import shop.mtcoding.blog2.model.User;
@@ -67,7 +70,7 @@ public class BoardController {
     public String boardWrite(BoardWriteDto boardDto){
         User principal = (User) session.getAttribute("principal");
         if( principal == null ){
-            throw new CustomException("로그인이 필요한 기능입니다.");
+            throw new CustomException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
         }
         if( boardDto.getTitle()==null||boardDto.getTitle().isEmpty()){
             throw new CustomException("글 제목이 없습니다.");
@@ -84,8 +87,13 @@ public class BoardController {
 
     @DeleteMapping("/board/{id}/delete")
     public ResponseEntity<?> boardDelete(@PathVariable int id){
-        
-        return null;
+        User principal = (User) session.getAttribute("principal");
+        if( principal == null ){
+            throw new CustomApiException("로그인이 필요한 기능입니다.", HttpStatus.UNAUTHORIZED);
+        }
+        service.글삭제(id, principal.getId());
+
+        return new ResponseEntity<>(new ResponseDto<>(1, "삭제 성공", null), HttpStatus.OK);
     }
 
     

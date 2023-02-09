@@ -8,6 +8,10 @@
         select * from board_tb
     </select>
 
+    <select id="findById" resultType="shop.mtcoding.blog2.model.Board">
+      select * from board_tb id = #{id}
+  </select>
+
     <select id="findAllforList" resultType="shop.mtcoding.blog2.dto.board.BoardResp$BoardMainListDto">
       select b.id, b.title, 
       ( select username from user_tb where id = b.user_id ) username 
