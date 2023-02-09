@@ -54,9 +54,12 @@
                 url: "/board/"+id+"/delete",
                 dataType:"json"
             }).done((res) => {
-            
+                alert(res.msg);
+                location.href="/";
             }).fail((err) => {
-            
+                // console.dir(err);
+                alert(err.responseJSON.msg);
+                location.href="/";
             });
         
         }

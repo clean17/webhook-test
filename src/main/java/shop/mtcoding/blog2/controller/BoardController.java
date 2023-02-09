@@ -47,7 +47,7 @@ public class BoardController {
 
     @GetMapping("/")
     public String  main(Model model){
-        mockSession();
+        // mockSession();
     List<BoardMainListDto> dtos = boardRepository.findAllforList();
     model.addAttribute("dtos", dtos);
     return "board/main";
