@@ -1,0 +1,27 @@
+.my-title-ellipsis{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.my-propile{
+    margin-left: 10px;
+}
+.my-grid{
+    /* display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px; */
+
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: start; */
+
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+}
+.testddd{
+    /* flex: 1 1 300px;
+    margin: 5px; */
+}
