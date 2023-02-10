@@ -10,7 +10,7 @@ import shop.mtcoding.blog2.dto.reply.ReplyResp.ReplyListRespDto;
 @Mapper
 public interface ReplyRepository {
     public List<Reply> findAll();
-    public List<ReplyListRespDto> findAllforList();
+    public List<ReplyListRespDto> findAllforList(int boardId);
     public Reply findById(int id);
     public int insert(
         @Param("comment") String comment,

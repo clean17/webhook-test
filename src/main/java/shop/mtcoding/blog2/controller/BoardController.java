@@ -73,7 +73,7 @@ public class BoardController {
     public String boardDetail(@PathVariable int id, Model model){
         BoardDetailDto db =  boardRepository.findBoardforDetail(id);
         model.addAttribute("dto", db);
-        List<ReplyListRespDto> replyList = replyRepository.findAllforList();
+        List<ReplyListRespDto> replyList = replyRepository.findAllforList(id);
         model.addAttribute("replyList", replyList);
         return "board/detail";
     }
