@@ -22,9 +22,11 @@ import shop.mtcoding.blog2.dto.board.BoardReq.BoardWriteDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardDetailDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardMainListDto;
 import shop.mtcoding.blog2.dto.board.BoardResp.BoardUpdateRespDto;
+import shop.mtcoding.blog2.dto.reply.ReplyResp.ReplyListRespDto;
 import shop.mtcoding.blog2.exception.CustomApiException;
 import shop.mtcoding.blog2.exception.CustomException;
 import shop.mtcoding.blog2.model.BoardRepository;
+import shop.mtcoding.blog2.model.ReplyRepository;
 import shop.mtcoding.blog2.model.User;
 import shop.mtcoding.blog2.service.BoardService;
 
@@ -39,6 +41,9 @@ public class BoardController {
     
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
 
     private void mockSession(){
         User mockUser = new User();
@@ -68,6 +73,8 @@ public class BoardController {
     public String boardDetail(@PathVariable int id, Model model){
         BoardDetailDto db =  boardRepository.findBoardforDetail(id);
         model.addAttribute("dto", db);
+        List<ReplyListRespDto> replyList = replyRepository.findAllforList();
+        model.addAttribute("replyList", replyList);
         return "board/detail";
     }
 

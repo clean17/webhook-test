@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import shop.mtcoding.blog2.dto.reply.ReplyReq.ReplySaveReqDto;
 import shop.mtcoding.blog2.exception.CustomException;
 import shop.mtcoding.blog2.model.User;
+import shop.mtcoding.blog2.service.ReplyService;
 
 @Controller
 public class ReplyController {
     
     @Autowired
     private HttpSession session;
+
+    @Autowired
+    private ReplyService replyService;
 
     @PostMapping("/reply")
     public String save(ReplySaveReqDto rdto){
@@ -31,8 +35,8 @@ public class ReplyController {
             throw new CustomException("게시글 번호가 필요합니다.");
         }
         
-         // 서비스 호출 (rdto, principal.getId())
+        replyService.댓글쓰기(rdto, principal.getId());
 
-        return "redirect:/board"+rdto.getBoardId();
+        return "redirect:/board/detail/"+rdto.getBoardId();
     }
 }

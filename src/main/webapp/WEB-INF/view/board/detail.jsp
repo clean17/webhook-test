@@ -23,9 +23,9 @@
         <hr />
         <div class="card">
             <form action="/reply" method="post">
-                <input type="hidden" name="boardId" id="${dto.id}">
+                <input type="hidden" name="boardId" value="${dto.id}">
                 <div class="card-body">
-                    <textarea id="reply-content" name="comment" class="form-control" rows="1"></textarea>
+                    <textarea id="reply-content" name="comment" placeholder="댓글을 입력하세요 " class="form-control" rows="1"></textarea>
                 </div>
                 <div class="card-footer">
                     <button type="submit" id="btn-reply-save" class="btn btn-primary">등록</button>
@@ -36,13 +36,16 @@
         <div class="card mt-3">
             <div class="card-header">댓글 리스트</div>
             <ul id="reply-box" class="list-group">
+                <c:forEach items="${replyList}" var="reply">
+                
                 <li id="reply-1" class="list-group-item d-flex justify-content-between">
-                    <div>댓글 내용 위치</div>
+                    <div>${reply.comment}</div>
                     <div class="d-flex">
-                        <div class="font-italic">작성자 : 댓글 작성자 위치 &nbsp;</div>
+                        <div class="font-italic">작성자 : ${reply.username} &nbsp;</div>
                         <button class="badge bg-secondary">삭제</button>
                     </div>
                 </li>
+                </c:forEach>
             </ul>
             
         </div>

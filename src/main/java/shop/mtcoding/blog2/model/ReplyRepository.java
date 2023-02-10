@@ -5,9 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import shop.mtcoding.blog2.dto.reply.ReplyResp.ReplyListRespDto;
+
 @Mapper
 public interface ReplyRepository {
     public List<Reply> findAll();
+    public List<ReplyListRespDto> findAllforList();
     public Reply findById(int id);
     public int insert(
         @Param("comment") String comment,

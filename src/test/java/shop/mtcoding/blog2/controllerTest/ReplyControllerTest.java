@@ -1,7 +1,12 @@
 package shop.mtcoding.blog2.controllerTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +21,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import shop.mtcoding.blog2.dto.reply.ReplyResp.ReplyListRespDto;
 import shop.mtcoding.blog2.model.User;
 
 
@@ -56,4 +62,21 @@ public class ReplyControllerTest {
 
         rs.andExpect(status().is3xxRedirection());
 }
+    @Test
+    public void boardDetail_test()throws Exception{
+        // String insert = "comment=안녕&board=1";
+        // int id=1;
+        
+        ResultActions rs = mvc.perform(get("/board/detail/1")
+                    // .content(insert)
+                    // .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                    // .session(session)
+                    );
+        
+                    // rs.andExpect(status().is3xxRedirection());
+                    Map<String, Object> map = rs.andReturn().getModelAndView().getModel();
+                    List<ReplyListRespDto> rdo = (List<ReplyListRespDto>)map.get("replyList");
+
+                    assertThat(rdo.get(0).getUsername()).isEqualTo("love");
+    }  
 }
