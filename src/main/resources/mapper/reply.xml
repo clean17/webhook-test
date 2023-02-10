@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shop.mtcoding.blog2.model.ReplyRepository">
+    <select id="findAll" resultType="shop.mtcoding.blog2.model.Reply">
+        select * from reply_tb
+    </select>
+</mapper>
