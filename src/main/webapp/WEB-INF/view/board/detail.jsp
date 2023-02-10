@@ -22,17 +22,18 @@
         </div>
         <hr />
         <div class="card">
-            <form>
+            <form action="/reply" method="post">
+                <input type="hidden" name="boardId" id="${dto.id}">
                 <div class="card-body">
-                    <textarea id="reply-content" class="form-control" rows="1"></textarea>
+                    <textarea id="reply-content" name="comment" class="form-control" rows="1"></textarea>
                 </div>
                 <div class="card-footer">
-                    <button type="button" id="btn-reply-save" class="btn btn-primary">등록</button>
+                    <button type="submit" id="btn-reply-save" class="btn btn-primary">등록</button>
                 </div>
             </form>
         </div>
         <br />
-        <div class="card">
+        <div class="card mt-3">
             <div class="card-header">댓글 리스트</div>
             <ul id="reply-box" class="list-group">
                 <li id="reply-1" class="list-group-item d-flex justify-content-between">
@@ -43,6 +44,7 @@
                     </div>
                 </li>
             </ul>
+            
         </div>
     </div>
     <script>

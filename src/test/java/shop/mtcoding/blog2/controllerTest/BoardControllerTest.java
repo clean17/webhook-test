@@ -60,14 +60,14 @@ public class BoardControllerTest {
                                                                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                                                                         .session(session));
 
-        rs.andExpect(status().isOk());
+        rs.andExpect(status().is3xxRedirection());
     }
 
 
 
     @Test
     public void boardDelete_test() throws Exception{
-        int id =1;
+        int id =3;
 
         ResultActions rs = mvc.perform(delete("/board/"+id+"/delete").session(session));
         rs.andExpect(status().isOk());

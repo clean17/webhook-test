@@ -12,16 +12,16 @@
       select * from reply_tb where id = #{id}
     </select>
 
-    <insert id="insertReply">
-      insert into reply_tb ( comment, user_id, board_id, created_at) 
-        values (#{comment}, #{userId}, #{boardId}, now())
+    <insert id="insert">
+      insert into reply_tb ( comment, board_id, user_id, created_at) 
+        values (#{comment}, #{boardId}, #{userId}, now())
     </insert>
 
-    <delete id="deleteReply">
+    <delete id="deleteById">
       delete from reply_tb where id = #{id}
     </delete>
 
-    <update id="updateReply">
+    <update id="updateById">
       update reply_tb set comment=#{comment} where id = #{id}
     </update>
 </mapper>

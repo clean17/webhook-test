@@ -8,14 +8,14 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface ReplyRepository {
     public List<Reply> findAll();
-    public Board findById(int id);
-    public int insertReply(
+    public Reply findById(int id);
+    public int insert(
         @Param("comment") String comment,
-        @Param("userId") int userId,
-        @Param("boardId") int boardId
+        @Param("boardId") int boardId,
+        @Param("userId") int userId
     );
-    public int deleteReply(int id);
-    public int updateReply(
-        @Param("comment") String title
+    public int deleteById(int id);
+    public int updateById(
+        @Param("comment") String comment
     );
 }

@@ -13,5 +13,4 @@ public class Reply {
     private int userId;
     private int boardId;
     private Timestamp createdAt;
-
 }

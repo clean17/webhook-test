@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import shop.mtcoding.blog2.model.BoardRepository;
 
+
+
 @MybatisTest
 public class BoardRepositoryTest {
     
