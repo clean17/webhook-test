@@ -10,10 +10,12 @@ public class ReplyResp {
     @Getter
     @Setter
     public static class ReplyListRespDto {
+    // public static class ReplyDetailRespDto{
         private Integer id;
         private String comment;
         private String username;
-        private int boardId;
+        private Integer userId;
+        private Integer boardId;
         private Timestamp createdAt;
     }
 }

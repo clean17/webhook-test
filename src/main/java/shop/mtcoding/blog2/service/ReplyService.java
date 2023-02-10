@@ -5,7 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 import shop.mtcoding.blog2.dto.reply.ReplyReq.ReplySaveReqDto;
+import shop.mtcoding.blog2.exception.CustomApiException;
 import shop.mtcoding.blog2.exception.CustomException;
 import shop.mtcoding.blog2.model.ReplyRepository;
 
@@ -27,7 +30,12 @@ public class ReplyService {
         }
     }
 
-    public void 댓글삭제() {
+    @Transactional
+    public void 댓글삭제(int id) {
+        int result = replyRepository.deleteById(id);
+        if ( result != 1 ){
+            throw new CustomApiException("댓글 삭제에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // @Transactional

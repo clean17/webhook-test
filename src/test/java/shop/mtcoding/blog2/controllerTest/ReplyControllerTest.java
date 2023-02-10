@@ -85,5 +85,7 @@ public class ReplyControllerTest {
     public void deleteReply_test() throws Exception{
         ResultActions rs = mvc.perform(delete("/reply/2").session(session));
         rs.andExpect(status().isOk());
+        String result = rs.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : "+ result);
     }
 }

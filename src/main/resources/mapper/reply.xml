@@ -8,11 +8,14 @@
         select * from reply_tb
     </select>
 
-    <select id="findAllforList" resultType="shop.mtcoding.blog2.dto.reply.ReplyResp$ReplyListRespDto">
+    <select id="findByBoardIdWithUser" resultType="shop.mtcoding.blog2.dto.reply.ReplyResp$ReplyListRespDto">
       select r.id, r.comment,
       ( select username from user_tb where id = r.user_id ) username,
+      r.user_id,
+      r.board_id,
       r.created_at
       from reply_tb r 
+      where r.board_id = #{boardId}
     </select>
 
     <select id="findById" resultType="shop.mtcoding.blog2.model.Reply">

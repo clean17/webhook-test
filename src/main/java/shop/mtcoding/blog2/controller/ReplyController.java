@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -30,6 +31,8 @@ public class ReplyController {
 
     @Autowired
     private ReplyRepository replyRepository;
+
+    // @GetMapping("/")
 
     @PostMapping("/reply")
     public String save(ReplySaveReqDto rdto){
@@ -63,8 +66,8 @@ public class ReplyController {
         if ( reply.getUserId() != principal.getId()){
             throw new CustomApiException("자신이 작성한 댓글만 삭제할 수 있습니다.", HttpStatus.FORBIDDEN);
         }
-        replyService.댓글삭제();
-        
+        replyService.댓글삭제(id);
+
         return new ResponseEntity<>(new ResponseDto<>(1, "삭제 성공", null), HttpStatus.OK);
     }
 }

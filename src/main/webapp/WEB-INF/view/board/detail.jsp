@@ -38,11 +38,17 @@
             <ul id="reply-box" class="list-group">
                 <c:forEach items="${replyList}" var="reply">
                 
-                <li id="reply-1" class="list-group-item d-flex justify-content-between">
+                <li id="reply-1" class="list-group-item d-flex justify-content-between ">
                     <div>${reply.comment}</div>
-                    <div class="d-flex">
+                    
+                    <div class="d-flex justify-content-left">
                         <div class="font-italic">작성자 : ${reply.username} &nbsp;</div>
-                        <button class="badge bg-secondary" onclick="deleteComment(${reply.id})">삭제</button>
+                        <div>
+                            <c:if test="${reply.userId == principal.id}">
+                                <button class="badge bg-secondary" onclick="updateComment(${reply.id})">수정</button>
+                                <button class="badge bg-secondary" onclick="deleteComment(${reply.id})">삭제</button>
+                            </c:if>
+                        </div>
                     </div>
                 </li>
                 </c:forEach>
@@ -55,6 +61,7 @@
                 tabsize: 2,
                 height: 400
             });
+
         function deleteBoardById(id){
             $.ajax({
                 type: "delete",
@@ -68,6 +75,7 @@
                 alert(err.responseJSON.msg);
                 location.href="/";
             });
+        }
         function deleteComment(id){
             $.ajax({
                 type: "delete",
@@ -75,10 +83,10 @@
                 dataType:"json"
             }).done((res) => {
                 alert(res.msg);
+                history.go(0);
             }).fail((err) => {
                 alert(err.responseJSON.msg);
             });
-
         }
     </script>
 <%@ include file="../layout/footer.jsp" %>
