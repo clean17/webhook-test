@@ -42,7 +42,7 @@
                     <div>${reply.comment}</div>
                     <div class="d-flex">
                         <div class="font-italic">작성자 : ${reply.username} &nbsp;</div>
-                        <button class="badge bg-secondary">삭제</button>
+                        <button class="badge bg-secondary" onclick="deleteComment(${reply.id})">삭제</button>
                     </div>
                 </li>
                 </c:forEach>
@@ -68,7 +68,17 @@
                 alert(err.responseJSON.msg);
                 location.href="/";
             });
-        
+        function deleteComment(id){
+            $.ajax({
+                type: "delete",
+                url: "/reply/"+id,
+                dataType:"json"
+            }).done((res) => {
+                alert(res.msg);
+            }).fail((err) => {
+                alert(err.responseJSON.msg);
+            });
+
         }
     </script>
 <%@ include file="../layout/footer.jsp" %>

@@ -13,7 +13,7 @@ public class ReplyResp {
         private Integer id;
         private String comment;
         private String username;
-        // private int boardId;
+        private int boardId;
         private Timestamp createdAt;
     }
 }

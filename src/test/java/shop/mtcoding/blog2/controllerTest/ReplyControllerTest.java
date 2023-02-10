@@ -1,6 +1,7 @@
 package shop.mtcoding.blog2.controllerTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -41,7 +42,7 @@ public class ReplyControllerTest {
     @BeforeEach
     public void setUp(){
         User mockUser = new User();
-        mockUser.setId(3);
+        mockUser.setId(1);
         mockUser.setUsername("ssar");
         mockUser.setPassword("1234");
         mockUser.setEmail("ssar@nate.com");
@@ -79,4 +80,10 @@ public class ReplyControllerTest {
 
                     assertThat(rdo.get(0).getUsername()).isEqualTo("love");
     }  
+
+    @Test
+    public void deleteReply_test() throws Exception{
+        ResultActions rs = mvc.perform(delete("/reply/2").session(session));
+        rs.andExpect(status().isOk());
+    }
 }

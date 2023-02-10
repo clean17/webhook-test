@@ -27,6 +27,9 @@ public class ReplyService {
         }
     }
 
+    public void 댓글삭제() {
+    }
+
     // @Transactional
     // public void 댓글삭제(int id, int principalId){
     //     Board board = replyRepository.findById(id);
