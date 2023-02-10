@@ -7,4 +7,21 @@
     <select id="findAll" resultType="shop.mtcoding.blog2.model.Reply">
         select * from reply_tb
     </select>
+
+    <select id="findById" resultType="shop.mtcoding.blog2.model.Reply">
+      select * from reply_tb where id = #{id}
+    </select>
+
+    <insert id="insertReply">
+      insert into reply_tb ( comment, user_id, board_id, created_at) 
+        values (#{comment}, #{userId}, #{boardId}, now())
+    </insert>
+
+    <delete id="deleteReply">
+      delete from reply_tb where id = #{id}
+    </delete>
+
+    <update id="updateReply">
+      update reply_tb set comment=#{comment} where id = #{id}
+    </update>
 </mapper>

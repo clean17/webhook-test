@@ -9,8 +9,10 @@ insert into board_tb (title, content, user_id, thumbnail, created_at) values ('�
 insert into board_tb (title, content, user_id, thumbnail, created_at) values ('여섯번째 제목 입니다.','여섯번째 내용입니다.', 2, '/images/dora1.png', now());
 insert into board_tb (title, content, user_id, thumbnail, created_at) values ('일곱번째 제목 입니다.','일곱번째 내용입니다.', 2, '/images/dora1.png', now());
 
-insert into reply_tb (content, user_id, created_at) values ('1등 ㅋㅋ', 2, now());
-insert into reply_tb (content, user_id, created_at) values ('2등', 1, now());
+insert into reply_tb (comment, user_id, board_id, created_at) values ('1등 ㅋㅋ', 2, 1, now());
+insert into reply_tb (comment, user_id, board_id, created_at) values ('댓글 테스트 !!', 1, 2,now());
+insert into reply_tb (comment, user_id, board_id, created_at) values ('좋은 글이네요', 1, 1,now());
+insert into reply_tb (comment, user_id, board_id, created_at) values ('ㅎㅎ', 2, 2,now());
 
 insert into love_tb (count, user_id) values (1, 1);
 

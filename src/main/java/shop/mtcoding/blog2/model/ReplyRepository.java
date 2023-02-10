@@ -16,7 +16,6 @@ public interface ReplyRepository {
     );
     public int deleteReply(int id);
     public int updateReply(
-        @Param("comment") String title,
-        @Param("userId") int content
+        @Param("comment") String title
     );
 }
