@@ -22,7 +22,7 @@ public class ReplyRepositoryTest {
 
         ObjectMapper om = new ObjectMapper();
 
-        List<ReplyListRespDto> replyList = replyRepository.findAllforList(1);
+        List<ReplyListRespDto> replyList = replyRepository.findByBoardIdWithUser(1);
 
         String responseBody = om.writeValueAsString(replyList);
         System.out.println("테스트 : "+ responseBody); 
